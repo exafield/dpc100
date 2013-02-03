@@ -1,0 +1,23 @@
+  100 DPC_S32 VAR(6)
+  110 VAR(0)=32
+  120 DPC_S32 D(16)
+  130 FOR I=0 TO 16
+  140   D(I)=VAR(0)
+  150 NEXT
+  160 FOR I=1 TO 6
+  170   IF VAR(I)=I+127
+  180 NEXT
+  185 PRINTF("%c%c%c%c%c%c", VAR(0),VAR(1),VAR(2),VAR(3),VAR(4),VAR(5))
+  186 PAUSE
+  190 DPC_S32 COUNT=0
+  200 DPC_S32 N=0
+  210 WHILE 1
+  220   N=COUNT%(80*2)
+  230   IF N>80 THEN N=80*2-N
+  240   FOR I=0 TO 16
+  260     IF N>=5*(I+1) THEN D(I)=VAR(5) ELSE IF N<5*I THEN D(I)=VAR(0) ELSE D(I)=VAR((N-I*5)%5)
+  280   NEXT
+  290   PRINTF("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", D(0),D(1),D(2),D(3),D(4),D(5),D(6),D(7),D(8),D(9),D(10),D(11),D(12),D(13),D(14),D(15) )
+  300   WAIT(0.01, 0)
+  310   COUNT=COUNT+1
+  320 WEND
